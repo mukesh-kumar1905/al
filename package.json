@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build",
-    "build": "babel lib -d src"
+    "build": "babel lib -d src",
+    "lint": "eslint ./lib/**"
   },
   "bin": {
     "al": "./src/al.js"
