@@ -1,28 +1,15 @@
-'use strict';
+import json from 'jsonfile';
+import { join } from 'path';
+import { cwd } from '../constants';
+import { yellow, green } from '../color';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (alias, to) {
+export default function(alias, to){
   // add alias to existing aliases
-  var aliases = _jsonfile2.default.readFileSync((0, _path.join)(_constants.cwd, 'alias.json'));
+  const aliases = json.readFileSync(join(cwd, 'alias.json'));
   aliases[alias] = to;
-  _jsonfile2.default.writeFileSync((0, _path.join)(_constants.cwd, 'alias.json'), aliases, { spaces: 2 });
+  json.writeFileSync(join(cwd, 'alias.json'), aliases, {spaces: 2});
 
   // give instruction on how to load
-  console.log((0, _color.yellow)('Added alias ' + (0, _color.green)(alias) + ' for ' + (0, _color.green)(to) + ' to config'));
-  console.log('Run ' + (0, _color.green)('al load') + ' to load config');
-};
-
-var _jsonfile = require('jsonfile');
-
-var _jsonfile2 = _interopRequireDefault(_jsonfile);
-
-var _path = require('path');
-
-var _constants = require('../constants');
-
-var _color = require('../color');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  console.log(yellow(`Added alias ${green(alias)} for ${green(to)} to config`));
+  console.log(`Run ${green('al load')} to load config`);
+}

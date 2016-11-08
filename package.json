@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run lint && npm run build",
+    "postinstall": "npm run build",
     "build": "babel lib -d src",
     "lint": "eslint ./lib/**"
   },
   "bin": {
-    "al": "./src/al.js"
+    "al": "./gen/al.js"
   },
   "author": "Mukesh Kumar <mukeshkmar1905@gmail.com>",
   "license": "MIT",

@@ -1,50 +1,32 @@
-'use strict';
+import { home, cwd, aliasRegex, pathRegex } from '../constants';
+import { green } from '../color';
+import json from 'jsonfile';
+import { join } from 'path';
+import file from 'fs';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
+export default function (){
     // read paths and aliases
-    var paths = _fs2.default.existsSync((0, _path.join)(_constants.cwd, 'path.json')) ? _jsonfile2.default.readFileSync((0, _path.join)(_constants.cwd, 'path.json')).join(':') : {};
-    var alias = _fs2.default.existsSync((0, _path.join)(_constants.cwd, 'alias.json')) ? _jsonfile2.default.readFileSync((0, _path.join)(_constants.cwd, 'alias.json')) : {};
+    const paths = file.existsSync(join(cwd, 'path.json')) ? json.readFileSync(join(cwd, 'path.json')).join(':') : {};
+    const alias = file.existsSync(join(cwd, 'alias.json')) ? json.readFileSync(join(cwd, 'alias.json')) : {};
 
     // source to be written to bash files for changes
-    var source = '';
+    let source = '';
     // if paths found write paths
-    source += paths.length ? 'export PATH=' + paths + ';\n' : '';
+    source += (paths.length ? 'export PATH=' + paths + ';\n' : '');
     // write aliases
-    Object.keys(alias).forEach(function (key) {
-        source += 'alias ' + key + '=\'' + alias[key] + '\';\n';
-    });
+    Object.keys(alias).forEach(function(key) { source += 'alias ' + key + '=\'' + alias[key] + '\';\n'; });
 
     // write changes for parent process
-    _fs2.default.writeFileSync((0, _path.join)(_constants.cwd, '.profile'), '#!/usr/bin/env bash\n' + source);
+    file.writeFileSync(join(cwd, '.profile'), '#!/usr/bin/env bash\n' + source);
 
-    var contents = _fs2.default.existsSync((0, _path.join)(_constants.home, '.bash_profile')) ? _fs2.default.readFileSync((0, _path.join)(_constants.home, '.bash_profile'), 'utf-8') : '';
+    let contents = file.existsSync(join(home, '.bash_profile')) ? file.readFileSync(join(home, '.bash_profile'), 'utf-8') : '';
     // replace existing path
-    contents = contents.replace(_constants.aliasRegex, '');
+    contents = contents.replace(aliasRegex, '');
     //replace existing contnts
-    contents = contents.replace(_constants.pathRegex, '');
+    contents = contents.replace(pathRegex, '');
 
-    _fs2.default.writeFileSync((0, _path.join)(_constants.home, '.bash_profile'), contents + '\n' + source);
-    console.log((0, _color.green)((0, _path.join)(_constants.home, '.bash_profile') + ' updated'));
+    file.writeFileSync(join(home, '.bash_profile'), contents + '\n' + source);
+    console.log(green(join(home, '.bash_profile') + ' updated'));
 
-    console.log('To update current console run `' + (0, _color.green)('source .profile') + '`');
-};
-
-var _constants = require('../constants');
-
-var _color = require('../color');
-
-var _jsonfile = require('jsonfile');
-
-var _jsonfile2 = _interopRequireDefault(_jsonfile);
-
-var _path = require('path');
-
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    console.log('To update current console run `' + green('source .profile') + '`');
+}
