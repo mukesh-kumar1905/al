@@ -1,10 +1,9 @@
 {
   "name": "al-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line tool to manage aliases",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run lint && npm run build",
     "build": "babel lib -d src",
     "lint": "eslint ./lib/**"
@@ -12,8 +11,26 @@
   "bin": {
     "al": "./src/al.js"
   },
-  "author": "Mukesh Kumar",
+  "author": "Mukesh Kumar <mukeshkmar1905@gmail.com>",
   "license": "MIT",
+  "homepage":"https://github.com/mukesh-kumar1905/al",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mukesh-kumar1905/al.git"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "bugs":{
+    "url": "https://github.com/mukesh-kumar1905/al/issues"
+  },
+  "keywords": [
+    "cli",
+    "terminal",
+    "path",
+    "alias",
+    "helper"
+  ],
   "dependencies": {
     "jsonfile": "^2.4.0"
   },
