@@ -5,9 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (alias, to) {
+  // add alias to existing aliases
   var aliases = _jsonfile2.default.readFileSync((0, _path.join)(_constants.cwd, 'alias.json'));
   aliases[alias] = to;
   _jsonfile2.default.writeFileSync((0, _path.join)(_constants.cwd, 'alias.json'), aliases, { spaces: 2 });
+
+  // give instruction on how to load
   console.log((0, _color.yellow)('Added alias ' + (0, _color.green)(alias) + ' for ' + (0, _color.green)(to) + ' to config'));
   console.log('Run ' + (0, _color.green)('al load') + ' to load config');
 };

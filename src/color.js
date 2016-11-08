@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+// colors for console output
 exports.green = green;
 exports.red = red;
 exports.yellow = yellow;

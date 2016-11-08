@@ -13,7 +13,7 @@ exports.default = function () {
     var source = '';
     // if paths found write paths
     source += paths.length ? 'export PATH=' + paths + ';\n' : '';
-    //write aliases
+    // write aliases
     Object.keys(alias).forEach(function (key) {
         source += 'alias ' + key + '=\'' + alias[key] + '\';\n';
     });

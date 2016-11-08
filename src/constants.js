@@ -1,5 +1,6 @@
 "use strict";
 
+// constants that are used across tasks
 module.exports = {
   cwd: process.cwd(),
   home: process.env.HOME,

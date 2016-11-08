@@ -1,5 +1,5 @@
 {
-  "name": "alias",
+  "name": "al-cli",
   "version": "1.0.0",
   "description": "Command line tool to manage aliases",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "al": "./src/al.js"
   },
   "author": "Mukesh Kumar",
-  "license": "WTFPL",
+  "license": "MIT",
   "dependencies": {
     "jsonfile": "^2.4.0"
   },
