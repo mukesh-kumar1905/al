@@ -6,8 +6,8 @@
   "scripts": {
     "prepublish": "npm run lint && npm run build",
     "postinstall": "npm run build",
-    "build": "babel lib -d src",
-    "lint": "eslint ./lib/**"
+    "build": "babel src -d gen",
+    "lint": "eslint ./src/**"
   },
   "bin": {
     "al": "./gen/al.js"
